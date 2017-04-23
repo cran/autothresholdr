@@ -17,3 +17,11 @@ auto_thresh(img, "h")
 auto_thresh_mask(img, "h") %>% display(method = "r")
 auto_thresh_apply_mask(img, "h") %>% normalize %>%  display(method = "r")
 
+## ----the image stack-----------------------------------------------------
+img <- imageData(readImage(system.file("extdata", "50.tif", 
+                                       package = "autothresholdr"), 
+                           as.is = TRUE))
+display(normalize(img), method = "r")
+MeanStackThresh(img, "h") %>% normalize %>%  display(method = "r")
+MedStackThresh(img, "h") %>% normalize %>%  display(method = "r")
+
