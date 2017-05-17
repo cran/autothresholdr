@@ -22,6 +22,6 @@ img <- imageData(readImage(system.file("extdata", "50.tif",
                                        package = "autothresholdr"), 
                            as.is = TRUE))
 display(normalize(img), method = "r")
-MeanStackThresh(img, "h") %>% normalize %>%  display(method = "r")
-MedStackThresh(img, "h") %>% normalize %>%  display(method = "r")
+mean_stack_thresh(img, "h") %>% normalize %>%  display(method = "r")
+med_stack_thresh(img, "h") %>% normalize %>%  display(method = "r")
 
