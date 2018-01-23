@@ -1,27 +1,34 @@
+## ----setup, include=FALSE------------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, fig.height = 6
+)
+
 ## ----load libraries, results='hide'--------------------------------------
 library(autothresholdr)
-library(EBImage)
+library(ijtiff)
 library(magrittr)
 
 ## ----the image-----------------------------------------------------------
-img <- imageData(readImage(system.file("extdata", "eg.tif", 
-                                           package = "autothresholdr"), 
-                              as.is = TRUE))
-display(normalize(img), method = "r")
+img <- read_tif(system.file("extdata", "fiji_eg.tif", 
+                            package = "autothresholdr"))
+dim(img)
+display(img[, , 1, 1])  # first channel, first frame
 
-## ----guess four----------------------------------------------------------
-display(img > 4, method = "r")
+## ----guess twenty--------------------------------------------------------
+display(img[, , 1, 1] > 20)
 
 ## ----thresh mask apply---------------------------------------------------
 auto_thresh(img, "huang")
-auto_thresh_mask(img, "huang") %>% display(method = "r")
-auto_thresh_apply_mask(img, "huang") %>% normalize %>%  display(method = "r")
+auto_thresh_mask(img, "huang") %>% {display(.[, , 1, 1])}
+auto_thresh_apply_mask(img, "huang") %>% {display(.[, , 1, 1])}
 
 ## ----the image stack-----------------------------------------------------
-img <- imageData(readImage(system.file("extdata", "50.tif", 
-                                           package = "autothresholdr"), 
-                              as.is = TRUE))
-display(normalize(img), method = "r")
-mean_stack_thresh(img, "tri") %>% normalize %>%  display(method = "r")
-med_stack_thresh(img, "tri") %>% normalize %>%  display(method = "r")
+img <- read_tif(system.file("extdata", "50.tif", 
+                            package = "autothresholdr"))
+dim(img)
+display(img[, , 1, 1])
+mean_stack_thresh(img, "tri") %>% {display(.[, , 1, 1])}
+med_stack_thresh(img, "tri") %>% {display(.[, , 1, 1])}
 

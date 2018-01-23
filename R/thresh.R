@@ -1,54 +1,73 @@
-#' Automatically threshold an image.
+#' Automatically threshold an image
 #'
 #' These functions apply the ImageJ "Auto Threshold" plugin's image thresholding
 #' methods. The available methods are "IJDefault", "Huang", "Huang2",
 #' "Intermodes", "IsoData", "Li", "MaxEntropy", "Mean", "MinErrorI", "Minimum",
-#' "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle",
+#' "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle" and
 #' "Yen". Read about them at \url{http://imagej.net/Auto_Threshold}.
 #'
-#' \itemize{ \item{\code{NA} values are automatically ignored.} \item{For
-#' \code{ignore_white = TRUE}, if the maximum value in the array is one of
-#' \code{2^8-1}, \code{2^12-1}, \code{2^16-1} or \code{2^32-1}, then those max
-#' values are ignored. That's because they're the white values in 8, 12, 16 and
-#' 32-bit images respectively (and these are the common image bit sizes to work
-#' with). This guesswork has to be done because \code{R} does not know how many
-#' bits the image was on disk. This guess is very unlikely to be wrong, and if
-#' it is, the consequences are negligible anyway. If you're very concerned, then
-#' just specify the max value in the \code{ignore_white} argument.} \item{If you
-#' have set \code{ignore_black = TRUE} and/or \code{ignore_white = TRUE} but you
-#' are still getting error/warning messages telling you to try them, then your
-#' chosen method is not working for the given array, so you should try a
-#' different method.} }
+#'
+#' \itemize{\item Values greater than or equal to the found threshold
+#' \emph{pass} the thresholding and values less than the threshold \emph{fail}
+#' the thresholding.
+#'
+#' \item{For `ignore_white = TRUE`, if the maximum value in the array is one of
+#' `2^8-1`, `2^12-1`, `2^16-1` or `2^32-1`, then those max values are ignored.
+#' That's because they're the white values in 8, 12, 16 and 32-bit images
+#' respectively (and these are the common image bit sizes to work with). This
+#' guesswork has to be done because `R` does not know how many bits the image
+#' was on disk. This guess is very unlikely to be wrong, and if it is, the
+#' consequences are negligible anyway. If you're very concerned, then just
+#' specify the white value as an integer in this `ignore_white` argument.}
+#'
+#' \item{If you have set `ignore_black = TRUE` and/or `ignore_white = TRUE` but
+#' you are still getting error/warning messages telling you to try them, then
+#' your chosen method is not working for the given array, so you should try a
+#' different method.}
+#'
+#' \item For a given array, if all values are less than `2^8`, saturated value
+#' is `2^8 - 1`, otherwise, saturated value is `2^16 - 1`. }
 #'
 #' @param int_arr An array (or vector) of \emph{integers}.
-#' @param method The name of the method you wish to use (e.g. "Huang"). Partial
-#'   matching is performed i.e. \code{method = "h"} is enough to get you "Huang"
-#'   and \code{method = "in"} is enough to get you "Intermodes". To perform
-#'   \emph{manual} thresholding (where you set the threshold yourself), supply
-#'   the threshold here as a number e.g. `method = 3`. So note that this would
-#'   \emph{not} select the third method in the above list of methods.
+#' @param method The name of the thresholding method you wish to use. The
+#'   available methods are `"IJDefault"`, `"Huang"`, `"Huang2"`, `"Intermodes"`,
+#'   `"IsoData"`, `"Li"`, `"MaxEntropy"`, `"Mean"`, `"MinErrorI"`, `"Minimum"`,
+#'   `"Moments"`, `"Otsu"`, `"Percentile"`, `"RenyiEntropy"`, `"Shanbhag"`,
+#'   `"Triangle"` and `"Yen"`. Partial matching is performed i.e. `method = "h"`
+#'   is enough to get you `"Huang"` and `method = "in"` is enough to get you
+#'   `"Intermodes"`. To perform \emph{manual} thresholding (where you set the
+#'   threshold yourself), supply the threshold here as a number e.g. `method =
+#'   3`; so note that this would \emph{not} select the third method in the above
+#'   list of methods.
 #' @param ignore_black Ignore black pixels/elements (zeros) when performing the
 #'   thresholding?
 #' @param ignore_white Ignore white pixels when performing the thresholding? If
-#'   set to \code{TRUE}, the function makes a good guess as to what the white
-#'   (saturated) value would be (see "Details"). If this is set to a number, all
+#'   set to `TRUE`, the function makes a good guess as to what the white
+#'   (saturated) value would be (see 'Details'). If this is set to a number, all
 #'   pixels with value greater than or equal to that number are ignored.
-#' @param fail When using \code{auto_thresh_apply_mask}, to what value do you
-#'   wish to set the pixels which fail to exceed the threshold.
+#' @param fail When using `auto_thresh_apply_mask()`, to what value do you wish
+#'   to set the pixels which fail to exceed the threshold? `fail = 'saturate'`
+#'   sets them to saturated value (see "Details"). `fail = 'zero'` sets them to
+#'   zero. You can also specify directly here a natural number (must be between
+#'   `0` and `2^16 - 1`) to use.
+#' @param ignore_na This should be `TRUE` if `NA`s in `int_arr` should be
+#'   ignored or `FALSE` if you want the presence of `NA`s in `int_arr` to throw
+#'   an error.
 #'
-#' @return \code{auto_thresh} returns an integer, the image threshold value.
-#'   Pixels exceeding this threshold are passed, but pixels at or below this
-#'   level are failed.
+#' @return `auto_thresh()` returns an object of class [th] containing the
+#'   threshold value. Pixels exceeding this threshold pass the thresholding,
+#'   pixels at or below this level fail.
 #'
-#'   \code{auto_thresh_mask} returns a binarized version of the input, with a
-#'   value of \code{TRUE} at points which exceed the threshold and \code{FALSE}
-#'   at those which do not. This has an attribute "threshold" to tell you what
-#'   the threshold value was.
+#'   `auto_thresh_mask()` returns an object of class [arr_mask] which is a
+#'   binarized version of the input, with a value of `TRUE` at points which
+#'   exceed the threshold and `FALSE` at those which do not.
 #'
-#'   \code{auto_thresh_apply_mask} returns the original input masked by the
+#'   `auto_thresh_apply_mask()` returns and object of class [threshed_arr] which is the original input masked by the
 #'   threshold, i.e. all points not exceeding the threshold are set to a
-#'   user-defined value (default \code{NA}). This has an attribute "threshold"
-#'   to tell you what the threshold value was.
+#'   user-defined value (default `NA`).
+#'
+#'   `mask()` is the same as `auto_thresh_mask()` and `apply_mask()` is the same
+#'   as `auto_thresh_apply_mask()`.
 #'
 #' @references \itemize{ \item{Huang, L-K & Wang, M-J J (1995), "Image
 #'   thresholding by minimizing the measure of fuzziness", Pattern Recognition
@@ -91,26 +110,46 @@
 #'   Journal of Electronic Imaging 13(1): 146-165} }
 #'
 #' @section Acknowledgements: Gabriel Landini coded all of these functions
-#'   together in one Java file for the ImageJ plugin.
+#'   in Java. These java functions were then translated to C++.
 #'
 #' @examples
-#' img <- EBImage::readImage(system.file("extdata", "eg.tif",
-#'                           package = "autothresholdr"), as.is = TRUE)
+#' img_location <- system.file("extdata", "eg.tif", package = "autothresholdr")
+#' img <- ijtiff::read_tif(img_location)
 #' auto_thresh(img, "huang")
 #' auto_thresh(img, "tri")
 #' auto_thresh(img, "Otsu")
 #' auto_thresh(img, 9)
 #' mask <- auto_thresh_mask(img, "huang")
-#' EBImage::display(mask, method = "r")
+#' ijtiff::display(mask[, , 1, 1])
 #' masked <- auto_thresh_apply_mask(img, "huang")
-#' EBImage::display(EBImage::normalize(masked), method = "r")
+#' ijtiff::display(masked[, , 1, 1])
 #' masked <- auto_thresh_apply_mask(img, 25)
-#' EBImage::display(EBImage::normalize(masked), method = "r")
+#' ijtiff::display(masked[, , 1, 1])
 #' @export
 auto_thresh <- function(int_arr, method,
-                        ignore_black = FALSE, ignore_white = FALSE) {
-  stopifnot(length(method) == 1)
-  if (is.numeric(method)) return(method)
+                        ignore_black = FALSE, ignore_white = FALSE,
+                        ignore_na = FALSE) {
+  checkmate::assert(checkmate::check_number(method),
+                    checkmate::check_string(method))
+  checkmate::assert_integerish(int_arr)
+  if (all(is.na(int_arr))) stop("int_arr is all NAs.")
+  if (anyNA(int_arr)) {
+    if (!ignore_na) {
+      stop("The input int_arr has NA values. To ignore them set ",
+           "ignore_na = TRUE.")
+    } else {
+      int_arr <- int_arr[!is.na(int_arr)]
+    }
+  }
+  checkmate::assert(checkmate::check_vector(int_arr, any.missing = FALSE),
+                    checkmate::check_array(int_arr, any.missing = FALSE))
+  checkmate::assert_numeric(int_arr, any.missing = FALSE,
+                            lower = 0, upper = .Machine$integer.max)
+  checkmate::assert_integerish(int_arr, any.missing = FALSE)
+  if (is.numeric(method)) {
+    thresh <- method
+    return(th(thresh, NA, NA, NA, NA))
+  }
   method <- tolower(method)
   if (startsWith("default", method)) method <- "IJDefault"
   if (startsWith("huang", method)) method <- "Huang"
@@ -121,9 +160,6 @@ auto_thresh <- function(int_arr, method,
   method <- RSAGA::match.arg.ext(method, available_methods,
                                  ignore.case = TRUE, numeric = TRUE) %>%
                                  {available_methods[.]}
-  if ((!CanBeInteger(int_arr)) || any(int_arr < 0, na.rm = TRUE)) {
-    stop("int_arr must be a matrix of non-negative integers.")
-  }
   if (ignore_black) int_arr[int_arr == 0] <- NA
   if (ignore_white) {
     if (isTRUE(ignore_white)) {
@@ -140,29 +176,45 @@ auto_thresh <- function(int_arr, method,
     stop("The image you're trying to threshold has only one unique value, ",
          "to perform thresholding, it needs at least two unique values.")
   }
-  autothresh_class <- rJava::.jnew("Auto_Threshold_R")
-  rJava::.jcall(autothresh_class, "I", method, im_hist) + rim[1]
+  thresh <- eval_text(method)(im_hist)
+  if (thresh < 0) {
+    stop(method, " method failed to find threshold.")
+  }
+  th(thresh = thresh, ignore_black = ignore_black, ignore_white = ignore_white,
+     ignore_na = ignore_na, autothresh_method = method)
 }
 
 #' @rdname auto_thresh
 #' @export
 auto_thresh_mask <- function(int_arr, method,
-                             ignore_black = FALSE, ignore_white = FALSE) {
+                             ignore_black = FALSE, ignore_white = FALSE,
+                             ignore_na = FALSE) {
   thresh <- auto_thresh(int_arr, method,
-                        ignore_black = ignore_black, ignore_white = ignore_white)
-  mask <- int_arr > thresh
-  attr(mask, "threshold") <- thresh
-  mask
+                        ignore_black = ignore_black,
+                        ignore_white = ignore_white,
+                        ignore_na = ignore_na)
+  mask <- int_arr >= thresh
+  arr_mask(arr = mask, thresh = thresh)
 }
 
 #' @rdname auto_thresh
 #' @export
 auto_thresh_apply_mask <- function(int_arr, method, fail = NA,
-                                   ignore_black = FALSE, ignore_white = FALSE) {
+                                   ignore_black = FALSE, ignore_white = FALSE,
+                                   ignore_na = FALSE) {
   mask <- auto_thresh_mask(int_arr, method,
-                           ignore_black = ignore_black, ignore_white = ignore_white)
+                           ignore_black = ignore_black,
+                           ignore_white = ignore_white,
+                           ignore_na = ignore_na)
+  fail <- translate_fail(int_arr, fail)
   int_arr[!mask] <- fail
-  attr(int_arr, "threshold") <- attr(mask, "threshold")
-  int_arr
+  threshed_arr(arr = int_arr, thresh = attr(mask, "thresh"))
 }
 
+#' @rdname auto_thresh
+#' @export
+mask <- auto_thresh_mask
+
+#' @rdname auto_thresh
+#' @export
+apply_mask <- auto_thresh_apply_mask

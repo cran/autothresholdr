@@ -1,3 +1,34 @@
+### 1.1.0
+
+#### NEW FEATURES
+* The package now has it's own S3 class system:
+    - Class `th` for thresholds.
+    - Class `threshed_arr` for thresholded arrays.
+    - Class `stack_threshed_arr` for stack-thresholded arrays.
+    - Class `arr_mask` for a mask of an array.
+    
+#### MINOR IMPROVEMENTS
+* The package no longer depends on `EBImage` package from Bioconductor. `EBImage` is a great package but CRAN packages are easier to install if they depend on CRAN packages only. Now `ijtiff` is used instead.
+
+#### DEPRECATED
+* `can_be_integer()` is gone. Use `checkmate::check_integerish()` instead.
+* Pillar statistics are no longer exported. Should you be looking for them, they are exported in the `detrendr` package.
+    
+
+## 1.0.0
+
+#### NEW FEATURES
+* The `rJava` (and hence java) dependency has been removed. All functions which used to be in java are now done in `Rcpp`.
+
+#### MINOR IMPROVEMENTS
+* The `fail` arguments of `auto_thresh_apply_mask()`, `mean_stack_thresh()` and `med_stack_thresh()` now work like the `na` argument of `nandb::WriteIntImage()`.
+* `auto_thresh_mask()` and `auto_thresh_apply_mask()` now have the abbreviations `mask()` and `apply_mask()`.
+* The functions now have an `ignore_na` argument for `NA` handling.
+
+#### BUG FIXES
+* It is now the case that for a threshold *x*, values greater than or equal to *x* are deemed to "pass" the thresholding and values less than *x* are deemed to "fail" the thresholding. Before what was happening was that values greater than *x* were deemed to have passed and values less than or equal to *x* were deemed to have failed.
+
+
 ### 0.6.0
 
 #### NEW FEATURES
@@ -15,15 +46,14 @@
 ### 0.5.0
 
 #### MINOR IMPROVEMENTS
-* Rename all exported functions to be in snake_case.
-* The skip.consts option in the stack_thresh functions is gone.
-  - Now these functions error if you pass them a constant array.
+* Renamed all exported functions to be in `snake_case`.
+* The skip.consts option in the stack_thresh functions is gone. Now these functions error if you pass them a constant array.
 
 
 ### 0.4.0
 
 #### MINOR IMPROVEMENTS
-* Add MeanStackThresh and MedStackThresh.
+* Add `MeanStackThresh()` and `MedStackThresh()`.
 
 
 ### 0.3.0
@@ -33,6 +63,6 @@
 * Improve OSX installation instructions in README.md.
 
 
-## autothresholdr 0.2.0
+## 0.2.0
 
 * The first CRAN-worthy version.
