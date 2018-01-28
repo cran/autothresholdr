@@ -1,7 +1,7 @@
 Package: autothresholdr
 Type: Package
 Title: An R Port of the 'ImageJ' Plugin 'Auto Threshold'
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: c(
     person("Rory", "Nolan", email = "rorynoolan@gmail.com", 
            role = c("aut", "cre", "trl")),
@@ -25,10 +25,10 @@ Suggests: testthat, covr, knitr, rmarkdown
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2018-01-23 15:06:48 UTC; rnolan
+Packaged: 2018-01-27 15:09:18 UTC; rnolan
 Author: Rory Nolan [aut, cre, trl],
   Luis Alvarez [ctb],
   Sergi Padilla-Parra [ctb, ths],
   Gabriel Landini [ctb, cph]
 Repository: CRAN
-Date/Publication: 2018-01-23 15:13:43 UTC
+Date/Publication: 2018-01-28 16:36:45 UTC

@@ -1,4 +1,4 @@
-108883d65fa52c5fd308ff5449be5774 *DESCRIPTION
+83f4f984e6c9a8d014d414443c8b0bdc *DESCRIPTION
 15d8dc64a3730dd87ae1fadd4805278a *NAMESPACE
 27e65d23ee7b7695d5c0a8db932464be *NEWS.md
 152ceaa184ecef50343b51eaa40c5d62 *R/RcppExports.R
@@ -11,12 +11,12 @@ ace2a55cee241e176d4558b3c453b24b *build/vignette.rds
 8bd15be5b5a58144b58b8cfbc5efdafd *inst/CITATION
 ccf9ae8e49d4567fe311238238a732cb *inst/doc/autothresholdr.R
 82e247f41e92c2a3f60f62bc93671e8b *inst/doc/autothresholdr.Rmd
-2d8a006d048c8c321025551a49bda99c *inst/doc/autothresholdr.html
+4f324e11700c4daaa3a3fa43af930328 *inst/doc/autothresholdr.html
 145ed3dd2aba63566f8a393e341f348d *inst/extdata/50.tif
 b6072898f2e04feae73f56700727222f *inst/extdata/eg.tif
 c81eb0320de662c46355c0809677b0f9 *inst/extdata/fiji_eg.tif
 c77572dcbe73678ecb10efb762b81bbf *inst/include/autothresholdr.h
-2ea3f4cb033fb6ad15dc97c4113d6782 *inst/include/autothresholdr_RcppExports.h
+31c08b209337e13324ab2abaff8f005f *inst/include/autothresholdr_RcppExports.h
 919ca62eeabd03b85c2fa56c638bd07c *man/arr_mask.Rd
 ca3fcabe9a0607bc87e46a01c159957e *man/auto_thresh.Rd
 f11082ea634317f985f6fc1596564f98 *man/mean_stack_thresh.Rd
@@ -24,7 +24,7 @@ f11082ea634317f985f6fc1596564f98 *man/mean_stack_thresh.Rd
 bd09d8e2581d321ae63e510e09f288f0 *man/stack_threshed_img.Rd
 81b2081bb055d5ff1b00233b645cc7a3 *man/th.Rd
 ab0db1216b7b73e1f7b4605887e96ecf *man/threshed_arr.Rd
-8445b968d0e137c58be77224dbe435b3 *src/AutoThreshold.cpp
+ba368ab896aada373dd5b07773e4483c *src/AutoThreshold.cpp
 24eded43ac73c259b48b412995c93189 *src/RcppExports.cpp
 038647a687c8baa98e7e9f00e9432bea *src/pillar_stats.cpp
 e7a7ebc452d14693e8c0f097079ea58f *tests/testthat.R
