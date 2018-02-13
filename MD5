@@ -1,6 +1,6 @@
-83f4f984e6c9a8d014d414443c8b0bdc *DESCRIPTION
+a39d6a519bc71c5e37c89478aa5a6aa7 *DESCRIPTION
 15d8dc64a3730dd87ae1fadd4805278a *NAMESPACE
-27e65d23ee7b7695d5c0a8db932464be *NEWS.md
+425ab9f5305d45e0c41dcf6f4902bd1e *NEWS.md
 152ceaa184ecef50343b51eaa40c5d62 *R/RcppExports.R
 c71cbb0967a46d87057a8818ab4973db *R/autothresholdr.R
 04ca2f73a8ff46046e82861fd68e716a *R/class_constructors.R
@@ -11,7 +11,7 @@ ace2a55cee241e176d4558b3c453b24b *build/vignette.rds
 8bd15be5b5a58144b58b8cfbc5efdafd *inst/CITATION
 ccf9ae8e49d4567fe311238238a732cb *inst/doc/autothresholdr.R
 82e247f41e92c2a3f60f62bc93671e8b *inst/doc/autothresholdr.Rmd
-4f324e11700c4daaa3a3fa43af930328 *inst/doc/autothresholdr.html
+ebad7aec1ef1e3936026ea230acbee74 *inst/doc/autothresholdr.html
 145ed3dd2aba63566f8a393e341f348d *inst/extdata/50.tif
 b6072898f2e04feae73f56700727222f *inst/extdata/eg.tif
 c81eb0320de662c46355c0809677b0f9 *inst/extdata/fiji_eg.tif
@@ -28,7 +28,7 @@ ba368ab896aada373dd5b07773e4483c *src/AutoThreshold.cpp
 24eded43ac73c259b48b412995c93189 *src/RcppExports.cpp
 038647a687c8baa98e7e9f00e9432bea *src/pillar_stats.cpp
 e7a7ebc452d14693e8c0f097079ea58f *tests/testthat.R
-0ddaa3b357529a9aa5701159e7b32d82 *tests/testthat/test_auto_thresh_methods.R
+dab3c6678b057de9856e9e2e8c533d20 *tests/testthat/test_auto_thresh_methods.R
 38772f9327c65bec4cad6e528cfa38c0 *tests/testthat/test_stack_thresh.R
 1aa59658ec06771b448c5fd97c16fbbf *tests/testthat/test_thresh.R
 b7e744d71badbd87176a0d2507a60803 *tests/testthat/test_utils.R
