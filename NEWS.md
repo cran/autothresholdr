@@ -1,3 +1,10 @@
+### 1.2.1
+
+#### BUG FIXES
+* For new versions of `filesstrings` and `ijtiff`.
+* Update to `checkmate` broke the package so this is the fix.
+
+
 ### 1.2.0
 
 #### MINOR IMPROVEMENTS
