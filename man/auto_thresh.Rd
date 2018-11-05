@@ -6,16 +6,16 @@
 \alias{auto_thresh_apply_mask}
 \alias{mask}
 \alias{apply_mask}
-\title{Automatically threshold an image}
+\title{Automatically threshold an array of non-negative integers.}
 \usage{
-auto_thresh(int_arr, method, ignore_black = FALSE, ignore_white = FALSE,
-  ignore_na = FALSE)
+auto_thresh(int_arr, method, ignore_black = FALSE,
+  ignore_white = FALSE, ignore_na = FALSE)
 
 auto_thresh_mask(int_arr, method, ignore_black = FALSE,
   ignore_white = FALSE, ignore_na = FALSE)
 
-auto_thresh_apply_mask(int_arr, method, fail = NA, ignore_black = FALSE,
-  ignore_white = FALSE, ignore_na = FALSE)
+auto_thresh_apply_mask(int_arr, method, fail = NA,
+  ignore_black = FALSE, ignore_white = FALSE, ignore_na = FALSE)
 
 mask(int_arr, method, ignore_black = FALSE, ignore_white = FALSE,
   ignore_na = FALSE)
@@ -24,7 +24,7 @@ apply_mask(int_arr, method, fail = NA, ignore_black = FALSE,
   ignore_white = FALSE, ignore_na = FALSE)
 }
 \arguments{
-\item{int_arr}{An array (or vector) of \emph{integers}.}
+\item{int_arr}{An array (or vector) of non-negative \emph{integers}.}
 
 \item{method}{The name of the thresholding method you wish to use. The
 available methods are \code{"IJDefault"}, \code{"Huang"}, \code{"Huang2"}, \code{"Intermodes"},
