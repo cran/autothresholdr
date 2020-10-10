@@ -18,10 +18,11 @@ if (utils::packageVersion("knitr") >= "1.20.15") {
 library(autothresholdr)
 
 ## ----the image----------------------------------------------------------------
-img <- ijtiff::read_tif(system.file("extdata", "fiji_eg.tif", 
-                                    package = "autothresholdr"))
+img <- ijtiff::read_tif(system.file("extdata", "fiji_eg.tif",
+  package = "autothresholdr"
+))
 dim(img)
-ijtiff::display(img)  # displays first channel, first frame
+ijtiff::display(img) # displays first channel, first frame
 
 ## ----guess twenty-------------------------------------------------------------
 ijtiff::display(img[, , 1, 1] > 20)
