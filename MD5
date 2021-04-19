@@ -1,6 +1,6 @@
-7f8b45d253d26d72a9617dd68be475b6 *DESCRIPTION
+541159e3dc4dd01c7c8ab2e007f746d2 *DESCRIPTION
 c3aabfd09aef270b8d746892f4c0d618 *NAMESPACE
-ac9be499e7f33393075446700af1ff58 *NEWS.md
+15e6fa3d9b7f538463530254098dbe74 *NEWS.md
 152ceaa184ecef50343b51eaa40c5d62 *R/RcppExports.R
 51ec086c10eac9d45b4b256bfa53029f *R/autothresholdr.R
 e7531db4b5847e5b44eb86977e803207 *R/class_constructors.R
@@ -12,13 +12,13 @@ c6974a43f80b9a2d7210f906e0e22e04 *build/vignette.rds
 c3d25d1f1dbf139668a977fbd44e1fb7 *inst/WORDLIST
 1b0986869f39afae598cf74d817c10bf *inst/doc/finding-thresholds.R
 2c9fb00e5345b74f8000fde2f34e5224 *inst/doc/finding-thresholds.Rmd
-93b10d14a534ba3787e2ddf7d932280b *inst/doc/finding-thresholds.html
+5d14ae7a9745f632c1df9204d9ced1f9 *inst/doc/finding-thresholds.html
 ad94f0a973d1ef2aedd51196b0ea0d40 *inst/doc/thresholding-image-stacks.R
 c5710512b1b1ec0f368dd306618e1829 *inst/doc/thresholding-image-stacks.Rmd
-a8171471762c23c498705d5ace61e855 *inst/doc/thresholding-image-stacks.html
+be269d1dbd0c339741656db7ab967ca6 *inst/doc/thresholding-image-stacks.html
 057c9332bbb0610cd693b90a777cfa16 *inst/doc/thresholding-images.R
 0cc67f9b57a99a1844ae97456734be7a *inst/doc/thresholding-images.Rmd
-72c84fab5a25478ba7a93d91d6ff8495 *inst/doc/thresholding-images.html
+dbd07d9ac9b2765208a1d781aaf84eb4 *inst/doc/thresholding-images.html
 145ed3dd2aba63566f8a393e341f348d *inst/extdata/50.tif
 b6072898f2e04feae73f56700727222f *inst/extdata/eg.tif
 c81eb0320de662c46355c0809677b0f9 *inst/extdata/fiji_eg.tif
