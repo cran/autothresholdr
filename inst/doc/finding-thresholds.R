@@ -45,3 +45,13 @@ auto_thresh(x, "huang")
 auto_thresh(x, "tri")
 auto_thresh(x, "otsu")
 
+## ----freq1--------------------------------------------------------------------
+x_freqtab <- x %>% 
+  table() %>% 
+  as.data.frame() %>% 
+  magrittr::set_names(c("value", "n"))
+head(x_freqtab)
+
+## ----freq2--------------------------------------------------------------------
+auto_thresh(x_freqtab, "huang")
+
